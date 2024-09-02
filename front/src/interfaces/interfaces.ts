@@ -52,7 +52,7 @@ export interface IOrderResponse {
 }
 
 export interface ICartComponentProps {
-    orders: IOrderResponse[];
+    orders?: IOrderResponse[];
 }
 
 export interface IRegisterUSer {

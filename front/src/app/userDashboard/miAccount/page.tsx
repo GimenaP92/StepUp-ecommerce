@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import ButtonAdvert from '@/components/buttons/ButtonAdvert';
 
 export default function MiAccount() {
-  const { user, orders, logOut } = useContext(UserContext);
+  const { user, logOut } = useContext(UserContext);
   const router = useRouter();
 
   console.log("User context in MiAccount:", user);
@@ -46,7 +46,7 @@ export default function MiAccount() {
 
             <div className="bg-white text-center shadow-md rounded-md border border-gray-300 p-4 w-full md:w-1/2">
               <h2 className="text-xl font-semibold text-customText bg-customBg text-center mb-4">COMPRAS REALIZADAS</h2>
-              <UserOrder orders={orders} />
+              <UserOrder/>
             </div>
           </div>
         ) : (

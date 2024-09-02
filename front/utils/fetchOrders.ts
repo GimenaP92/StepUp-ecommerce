@@ -4,7 +4,7 @@ export async function fetchUserOrders(token: string) {
         const response = await fetch("http://localhost:3000/users/orders", {
             method: "GET",
             headers: {
-                Authorization:  `Bearer ${token}`,
+                Authorization:  `${token}`,
                 "Content-Type": "application/json",
             },
         });

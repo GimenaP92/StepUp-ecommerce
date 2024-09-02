@@ -32,7 +32,7 @@ export const CartContext = createContext<ICartContextType>({
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     const [cartItems, setCartItems] = useState<IProduct[]>([]);
     const [total, setTotal] = useState<number>(0);
-    const { isLogged } = useContext(UserContext);
+    const { isLogged, getOrders } = useContext(UserContext);
 
 
     const checkout = async (cartItems: IProduct[]) => {
@@ -43,7 +43,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
             const response = await fetch("http://localhost:3000/orders", {
                 method: "POST",
                 headers: {
-                    "Authorization": `Bearer ${token}`,
+                    "Authorization": `${token}`,
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ products }),
@@ -51,6 +51,8 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     
             if (response.ok) {
                 alert("Compra realizada con éxito");
+                await getOrders();
+                setCartItems([]);
             } else {
                 alert("Hubo un error al realizar la compra");
             }
@@ -62,7 +64,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     
     const proceedcheckout = () => {
         checkout(cartItems);
-        setCartItems([])
+
     }
 
     useEffect(() => {
