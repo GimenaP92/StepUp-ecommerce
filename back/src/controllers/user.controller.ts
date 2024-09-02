@@ -3,7 +3,18 @@ import { catchedController } from "../utils/catchedController";
 import {
   loginUserService,
   registerUserService,
+  getUsersService
 } from "../services/user.service";
+
+export const getUsers = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const users = await getUsersService();
+    res.status(200).json(users);
+  } catch (error) {
+    console.error("Error en el controlador al obtener usuarios:", error);
+    res.status(500).json({ message: "No se pudieron obtener los usuarios." });
+  }
+};
 
 export const registerUser = catchedController(
   async (req: Request, res: Response) => {

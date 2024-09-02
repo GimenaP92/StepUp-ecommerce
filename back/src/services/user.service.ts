@@ -9,6 +9,18 @@ import {
 } from "./credential.service";
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../config/envs";
+import { getUsers } from "../controllers/user.controller";
+
+export const getUsersService = async (): Promise<User[]> => {
+  try {
+    const users = await UserRepository.find();
+    return users;
+  } catch (error) {
+    console.error("Error al obtener usuarios:", error);
+    throw new Error("No se pudieron obtener los usuarios.");
+  }
+}
+  
 
 export const checkUserExists = async (email: string): Promise<boolean> => {
   const user = await UserRepository.findOneBy({ email });
