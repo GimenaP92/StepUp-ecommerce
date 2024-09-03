@@ -7,10 +7,15 @@ import { useRouter } from 'next/navigation'
 import ButtonAdvert from '@/components/buttons/ButtonAdvert';
 
 export default function MiAccount() {
-  const { user, logOut } = useContext(UserContext);
+  const { user, logOut, getOrders } = useContext(UserContext);
   const router = useRouter();
 
-  console.log("User context in MiAccount:", user);
+
+  useEffect(() => {
+    if (user) {
+      getOrders(); 
+    }
+  }, [user, getOrders]);
 
   const logOutHandler = () => {
     try {

@@ -62,13 +62,15 @@ export const UserProvider = ({children}: {children: React.ReactNode}) => {
 
     const getOrders = async () => {
         try {
-            const token = localStorage.getItem("token") || "";
+            const token = typeof window !== "undefined" ? localStorage.getItem("token") || "" : "";
             const data = await fetchUserOrders(token);
             setOrders(data);
+            localStorage.setItem("orders", JSON.stringify(data));
         } catch (error) {
-            console.error(error);
-        }
+            console.error("Error al obtener las órdenes:", error);
+                 }
     };
+    
 
     const logOut = () => {
         if (typeof window !== "undefined") {

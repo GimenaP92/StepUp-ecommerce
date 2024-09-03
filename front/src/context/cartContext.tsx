@@ -38,7 +38,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     const checkout = async (cartItems: IProduct[]) => {
         try {
             const products = cartItems.map((item) => item.id);
-            const token = localStorage.getItem("token");
+            const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
     
             const response = await fetch("http://localhost:3000/orders", {
                 method: "POST",
