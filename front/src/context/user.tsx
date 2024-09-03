@@ -26,15 +26,18 @@ export const UserProvider = ({children}: {children: React.ReactNode}) => {
         try {
             const data = await fetchLoginUser(credentials);
             if (data.login) {
-                if (typeof window !== "undefined") {
-                    localStorage.setItem("user", JSON.stringify(data.user));
-                    localStorage.setItem("token", data.token);
-                }
-                setUser({
+                const userData = {
                     login: data.login,
                     token: data.token,
                     user: data.user,
-                });
+                };
+                if (typeof window !== "undefined") {
+                 
+                    localStorage.setItem("user", JSON.stringify(userData));
+                    localStorage.setItem("token", data.token);
+                }
+                
+                setUser(userData);
                 setIsLogged(true);
                 return true;
             } else {
@@ -58,18 +61,21 @@ export const UserProvider = ({children}: {children: React.ReactNode}) => {
             console.error(error);
             return false;
         }
-    };
-
+    };    
+    
     const getOrders = async () => {
         try {
-            const token = typeof window !== "undefined" ? localStorage.getItem("token") || "" : "";
-            const data = await fetchUserOrders(token);
-            setOrders(data);
-            localStorage.setItem("orders", JSON.stringify(data));
+          console.log("Llamada a getOrders");
+          const token = typeof window !== "undefined" ? localStorage.getItem("token") || "" : "";
+          const data = await fetchUserOrders(token);
+          console.log("Datos obtenidos:", data);
+          setOrders(data);
+          localStorage.setItem("orders", JSON.stringify(data));
         } catch (error) {
-            console.error("Error al obtener las órdenes:", error);
-                 }
-    };
+          console.error("Error al obtener las órdenes:", error);
+        }
+      };
+      
     
 
     const logOut = () => {

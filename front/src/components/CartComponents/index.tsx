@@ -10,13 +10,15 @@ import { checkCustomRoutes } from "next/dist/lib/load-custom-routes";
 function CartComponent() {
     const { cartItems, removeFromCart, total, proceedcheckout } = useContext(CartContext);
     const handleCheckout = async () => {
-      try {
-          await proceedcheckout(); 
-      } catch (error) {
+        try {
+          await proceedcheckout();
+        } catch (error) {
           console.error("Error durante el checkout:", error);
           alert("Hubo un error al realizar la compra");
-      }
-  };
+        }
+      };
+      
+      
   
 
   return (

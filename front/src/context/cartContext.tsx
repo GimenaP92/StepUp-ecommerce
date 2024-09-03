@@ -26,7 +26,7 @@ export const CartContext = createContext<ICartContextType>({
     addToCart: () => {},
     removeFromCart: () => {},
     total: 0,
-    proceedcheckout:() => {}
+    proceedcheckout: async () => {}
 });
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
@@ -37,35 +37,42 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
     const checkout = async (cartItems: IProduct[]) => {
         try {
-            const products = cartItems.map((item) => item.id);
-            const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
-    
-            const response = await fetch("http://localhost:3000/orders", {
-                method: "POST",
-                headers: {
-                    "Authorization": `${token}`,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ products }),
-            });
-    
-            if (response.ok) {
-                alert("Compra realizada con éxito");
-                await getOrders();
-                setCartItems([]);
-            } else {
-                alert("Hubo un error al realizar la compra");
-            }
-        } catch (error) {
-            console.error("Error durante el checkout:", error);
+          const products = cartItems.map((item) => item.id);
+          const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+      
+          const response = await fetch("http://localhost:3000/orders", {
+            method: "POST",
+            headers: {
+              "Authorization": `${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ products }),
+          });
+      
+          if (response.ok) {
+            alert("Compra realizada con éxito");
+            await getOrders();
+            setCartItems([]);
+          } else {
             alert("Hubo un error al realizar la compra");
+          }
+        } catch (error) {
+          console.error("Error durante el checkout:", error);
+          alert("Hubo un error al realizar la compra");
         }
-    };
+      };
+      
     
-    const proceedcheckout = () => {
-        checkout(cartItems);
-
-    }
+    const proceedcheckout = async (): Promise<void> => {
+        try {
+          await checkout(cartItems);
+        } catch (error) {
+          console.error("Error durante el checkout:", error);
+          alert("Hubo un error al realizar la compra");
+        }
+      };
+      
+      
 
     useEffect(() => {
         
@@ -78,11 +85,10 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     useEffect(() => {
-        // Actualizar el total cuando cambien los items del carrito
+       
         const totalAmount = cartItems.reduce((acc, item) => acc + item.price, 0);
         setTotal(totalAmount);
 
-        // Guardar el carrito actualizado en localStorage
         if (typeof window !== "undefined") {
             localStorage.setItem("cartItems", JSON.stringify(cartItems));
         }

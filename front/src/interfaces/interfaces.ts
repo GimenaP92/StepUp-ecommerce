@@ -39,6 +39,20 @@ export interface ILoginUser {
     password:string;
 }
 
+export interface IUserResponse {
+    login: boolean,
+    user: IUser | null,
+    token:string
+}
+
+export interface IRegisterUSer {
+    name: string;
+    email: string;
+    password: string;
+    address: string;
+    phone: string;
+}
+
 export interface ILoginClientProps {
     setToken: (token: string | null) => void;
   }
@@ -55,13 +69,6 @@ export interface ICartComponentProps {
     orders?: IOrderResponse[];
 }
 
-export interface IRegisterUSer {
-    name: string;
-    email: string;
-    password: string;
-    address: string;
-    phone: string;
-}
 
 export interface ICreateOrder {
     userId: number;
@@ -89,15 +96,11 @@ export interface ICartContextType {
     addToCart: (product:number) => void,
     removeFromCart: (product: number) => void,
     total: number;
-    proceedcheckout: () => void,
+    proceedcheckout: () => Promise<void>;
     cartItems: IProduct[],
 }
 
-export interface IUserResponse {
-    login: boolean,
-    user: Partial<IUser> | null,
-    token:string
-}
+
 
 export interface IUserContextType {
     user: IUserResponse | null;

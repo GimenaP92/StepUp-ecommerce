@@ -1,5 +1,4 @@
-import { ILoginUser, IRegisterUSer } from "@/interfaces/interfaces";
-
+import { ILoginUser, IRegisterUSer, IUserResponse} from "@/interfaces/interfaces";
 
 export const fetchRegisterUser = async (user: IRegisterUSer) => {
     const response = await fetch("http://localhost:3000/users/register", {
@@ -12,6 +11,7 @@ export const fetchRegisterUser = async (user: IRegisterUSer) => {
       const data = await response.json();
       return data;
 }
+
 
 export const fetchLoginUser = async (credentials: ILoginUser) => {
     const response = await fetch("http://localhost:3000/users/login", {

@@ -15,7 +15,7 @@ export default function MiAccount() {
     if (user) {
       getOrders(); 
     }
-  }, [user, getOrders]);
+  }, [user]);
 
   const logOutHandler = () => {
     try {
