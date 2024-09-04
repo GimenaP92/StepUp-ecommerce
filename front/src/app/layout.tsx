@@ -24,7 +24,7 @@ export default function RootLayout({
     <UserProvider>
     <CartProvider>
       <Navbar />
-      <main className="flex-grow bg-purple-100 font-serif">{children}</main>
+      <main className="flex-grow bg-white font-serif">{children}</main>
       <Footer />
       </CartProvider>
       </UserProvider>

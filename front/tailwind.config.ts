@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        customBgCard: '#f9f9f9',      
+        customBgCard: '#ffffff',      
         customBg: '#0a0a0a',
         customBgPromos: '#131010', 
         customTextPromos: '#d9cece',
