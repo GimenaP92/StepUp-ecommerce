@@ -9,6 +9,10 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
+app.get("/", (req, res) => {
+  res.send("Servidor funcionando");
+});
+
 app.use(router);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
