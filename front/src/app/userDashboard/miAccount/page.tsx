@@ -13,9 +13,10 @@ export default function MiAccount() {
 
   useEffect(() => {
     if (user) {
-      getOrders(); 
+      getOrders();
     }
-  }, [user]);
+  }, [user, getOrders]);
+  
 
   const logOutHandler = () => {
     try {

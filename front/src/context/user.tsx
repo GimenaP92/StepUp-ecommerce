@@ -3,6 +3,7 @@ import { createContext, useState, useEffect, useContext } from "react";
 import { IUserContextType, IUserResponse, IOrderResponse, ILoginUser, IRegisterUSer } from "@/interfaces/interfaces";
 import { fetchLoginUser, fetchRegisterUser } from "../../utils/fetchUser";
 import { fetchUserOrders } from "../../utils/fetchOrders";
+import { useCallback } from "react";
 
 export const UserContext = createContext<IUserContextType>({
     user: null,
@@ -63,9 +64,8 @@ export const UserProvider = ({children}: {children: React.ReactNode}) => {
         }
     };    
     
-    const getOrders = async () => {
+    const getOrders = useCallback(async () => {
         try {
-          console.log("Llamada a getOrders");
           const token = typeof window !== "undefined" ? localStorage.getItem("token") || "" : "";
           const data = await fetchUserOrders(token);
           console.log("Datos obtenidos:", data);
@@ -74,7 +74,8 @@ export const UserProvider = ({children}: {children: React.ReactNode}) => {
         } catch (error) {
           console.error("Error al obtener las órdenes:", error);
         }
-      };
+      }, [setOrders]);
+      
       
     
 
