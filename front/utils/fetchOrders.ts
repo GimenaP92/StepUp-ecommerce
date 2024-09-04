@@ -1,7 +1,7 @@
-
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 export async function fetchUserOrders(token: string) {
     try {
-        const response = await fetch("http://localhost:3000/users/orders", {
+        const response = await fetch(`${apiUrl}/users/orders`, {
             method: "GET",
             headers: {
                 Authorization:  `${token}`,
@@ -15,3 +15,4 @@ export async function fetchUserOrders(token: string) {
     }
 
 }
+

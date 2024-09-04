@@ -5,6 +5,8 @@ import { ICartContextType, IProduct } from "@/interfaces/interfaces";
 import { fetchProductDetail } from "../../utils/fetchProducts";
 import { UserContext } from "./user";
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
 const addItem = async (cartItems: IProduct[], product: number): Promise<IProduct[]> => {
     const existingProduct = cartItems.find((item) => item.id === product);
     if (existingProduct) {
@@ -40,7 +42,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
           const products = cartItems.map((item) => item.id);
           const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
       
-          const response = await fetch("http://localhost:3000/orders", {
+          const response = await fetch(`${apiUrl}/orders`, {
             method: "POST",
             headers: {
               "Authorization": `${token}`,

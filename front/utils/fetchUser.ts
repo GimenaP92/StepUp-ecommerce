@@ -1,7 +1,8 @@
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 import { ILoginUser, IRegisterUSer, IUserResponse} from "@/interfaces/interfaces";
 
 export const fetchRegisterUser = async (user: IRegisterUSer) => {
-    const response = await fetch("http://localhost:3000/users/register", {
+    const response = await fetch(`${apiUrl}/users/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -14,7 +15,7 @@ export const fetchRegisterUser = async (user: IRegisterUSer) => {
 
 
 export const fetchLoginUser = async (credentials: ILoginUser) => {
-    const response = await fetch("http://localhost:3000/users/login", {
+    const response = await fetch(`${apiUrl}/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
