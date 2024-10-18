@@ -3,17 +3,22 @@ import { FaTag, FaTruck, FaShieldAlt } from 'react-icons/fa';
 
 export default function LandingPage() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
-      <h1 className="text-4xl text-center bg-black p-3 font-thin text-customBgCard mb-4 mt-10 mx-auto max-w-4xl">
-        Cada paso que das en el entrenamiento es un avance hacia tu mejor versión
-      </h1>
-      <p className="text-lg text-center mb-8 max-w-3xl">
-        Bienvenidos a StepUp, la tienda online donde la pasión por el deporte se encuentra con la moda. Aquí ofrecemos una amplia gama de zapatillas deportivas diseñadas para maximizar tu rendimiento en cada actividad. Desde running hasta entrenamiento, y desde fútbol hasta deportes urbanos, nuestras zapatillas combinan tecnología avanzada, confort y estilo para acompañarte en cada paso. Nos comprometemos a brindarte lo mejor en calzado deportivo, con marcas líderes y modelos que te ayudarán a alcanzar tus metas deportivas sin comprometer tu estilo personal. ¡Encuentra tus zapas ideales y supera tus límites con nosotros!
-      </p>
-      <Link href="/home" className="px-6 py-3 bg-customBg text-white text-lg font-thin rounded-lg hover:bg-customHoverButton transition duration-300 mb-8">
-        Te invitamos a conocer nuestros productos
-      </Link>
-      <div className="w-full bg-customBgPromos text-customTextPromos py-12 px-6 md:px-12 mt-16 mb-10">
+    <div className="flex flex-col items-center justify-center bg-gray-100 p-6">
+      {/* Primera sección */}
+      <section className="flex flex-col items-center justify-center min-h-screen bg-white">
+        <h1 className="text-4xl text-center bg-black p-3 font-thin text-customBgCard mb-4 mt-10 mx-auto max-w-4xl">
+          Cada paso que das en el entrenamiento es un avance hacia tu mejor versión
+        </h1>
+        <p className="text-lg text-center mb-8 max-w-3xl">
+          Bienvenidos a StepUp, la tienda online donde la pasión por el deporte se encuentra con la moda. Aquí ofrecemos una amplia gama de zapatillas deportivas diseñadas para maximizar tu rendimiento en cada actividad. Desde running hasta entrenamiento, y desde fútbol hasta deportes urbanos, nuestras zapatillas combinan tecnología avanzada, confort y estilo para acompañarte en cada paso. Nos comprometemos a brindarte lo mejor en calzado deportivo, con marcas líderes y modelos que te ayudarán a alcanzar tus metas deportivas sin comprometer tu estilo personal. ¡Encuentra tus zapas ideales y supera tus límites con nosotros!
+        </p>
+        <Link href="/home" className="px-6 py-3 bg-customBg text-white text-lg font-thin rounded-lg hover:bg-customHoverButton transition duration-300 mb-8">
+          Te invitamos a conocer nuestros productos
+        </Link>
+      </section>
+
+      {/* Segunda sección */}
+      <section className="flex flex-col items-center justify-center min-h-screen bg-customBgPromos text-customTextPromos py-16 px-6 md:px-12">
         <h2 className="text-2xl font-bold text-center mb-8">¿Por qué elegirnos?</h2>
         <div className="flex flex-col md:flex-row justify-around items-start gap-8">
           <div className="flex items-start">
@@ -38,7 +43,7 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

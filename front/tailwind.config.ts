@@ -9,6 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        customBgPage:'#FAFAF0',
+        customTextPage:'#333',
         customBgCard: '#ffffff',      
         customBg: '#0a0a0a',
         customBgPromos: '#131010', 

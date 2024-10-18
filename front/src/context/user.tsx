@@ -1,5 +1,5 @@
 "use client"
-import { createContext, useState, useEffect, useContext } from "react";
+import { createContext, useState, useEffect } from "react";
 import { IUserContextType, IUserResponse, IOrderResponse, ILoginUser, IRegisterUSer } from "@/interfaces/interfaces";
 import { fetchLoginUser, fetchRegisterUser } from "../../utils/fetchUser";
 import { fetchUserOrders } from "../../utils/fetchOrders";
@@ -23,6 +23,7 @@ export const UserProvider = ({children}: {children: React.ReactNode}) => {
     const [isLogged, setIsLogged] = useState<boolean>(false);
     const [orders, setOrders] = useState<IOrderResponse[]>([]);
 
+    //LOGIN DE USUARIO
     const signIn = async (credentials: ILoginUser): Promise<boolean> => {
         try {
             const data = await fetchLoginUser(credentials);
@@ -50,6 +51,7 @@ export const UserProvider = ({children}: {children: React.ReactNode}) => {
         }
     };
 
+    //REGISTRO DE USUARIO
     const signUp = async (user: IRegisterUSer) => {
         try {
             const data = await fetchRegisterUser(user);
@@ -63,12 +65,12 @@ export const UserProvider = ({children}: {children: React.ReactNode}) => {
             return false;
         }
     };    
-    
+
+    //OBTENER ORDENES DE COMPRA
     const getOrders = useCallback(async () => {
         try {
           const token = typeof window !== "undefined" ? localStorage.getItem("token") || "" : "";
           const data = await fetchUserOrders(token);
-          console.log("Datos obtenidos:", data);
           setOrders(data);
           localStorage.setItem("orders", JSON.stringify(data));
         } catch (error) {
@@ -78,7 +80,7 @@ export const UserProvider = ({children}: {children: React.ReactNode}) => {
       
       
     
-
+    //CERRAR SESION DE USUARIO
     const logOut = () => {
         if (typeof window !== "undefined") {
             localStorage.removeItem("user");
@@ -88,6 +90,7 @@ export const UserProvider = ({children}: {children: React.ReactNode}) => {
         }
     };
 
+    //PERSISTENCIA DE SESION
     useEffect(() => {
         if (typeof window !== "undefined") {
             const storedUser = localStorage.getItem("user");

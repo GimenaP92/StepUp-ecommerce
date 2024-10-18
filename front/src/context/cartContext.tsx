@@ -4,6 +4,7 @@ import { createContext, useState, useEffect, useContext } from "react";
 import { ICartContextType, IProduct } from "@/interfaces/interfaces";
 import { fetchProductDetail } from "../../utils/fetchProducts";
 import { UserContext } from "./user";
+import { fetchPostUserOrders } from "../../utils/fetchOrders";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -32,39 +33,50 @@ export const CartContext = createContext<ICartContextType>({
 });
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
-    const [cartItems, setCartItems] = useState<IProduct[]>([]);
-    const [total, setTotal] = useState<number>(0);
-    const { isLogged, getOrders } = useContext(UserContext);
+  const [cartItems, setCartItems] = useState<IProduct[]>([]);
+  const [total, setTotal] = useState<number>(0);
+  const {  getOrders } = useContext(UserContext);
+  
+  //AGREGAR AL CARRITO
+  const addToCart = async (product: number) => {
+    const updatedCart = await addItem(cartItems, product);
+    setCartItems(updatedCart);
+  };
+  
+  //ELIMINAR DEL CARRITO
+  const removeFromCart = (product: number) => {
+      const updatedCart = removeItem(cartItems, product);
+      setCartItems(updatedCart);
+  };
 
 
-    const checkout = async (cartItems: IProduct[]) => {
-        try {
-          const products = cartItems.map((item) => item.id);
-          const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+  //COMPRA DE PRODUCTOS EN EL CARRITO
+  const checkout = async (cartItems: IProduct[]) => {
+    try {
+      const products = cartItems.map((item) => item.id);
+      const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+  
+      if (!token) {
+        alert("No se encontró el token de autenticación");
+        return;
+      }
+  
+      const response = await fetchPostUserOrders(products, token);
+  
+      if (response?.ok) {
+        alert("Compra realizada con éxito");
+        await getOrders();
+        setCartItems([]);
+      } else {
+        alert("Hubo un error al realizar la compra");
+      }
+    } catch (error) {
+      console.error("Error durante el checkout:", error);
+      alert("Hubo un error al realizar la compra");
+    }
+  };
       
-          const response = await fetch(`${apiUrl}/orders`, {
-            method: "POST",
-            headers: {
-              "Authorization": `${token}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ products }),
-          });
-      
-          if (response.ok) {
-            alert("Compra realizada con éxito");
-            await getOrders();
-            setCartItems([]);
-          } else {
-            alert("Hubo un error al realizar la compra");
-          }
-        } catch (error) {
-          console.error("Error durante el checkout:", error);
-          alert("Hubo un error al realizar la compra");
-        }
-      };
-      
-    
+    //ENVIA EL CARRITO ACTUAL AL CHECKOUT
     const proceedcheckout = async (): Promise<void> => {
         try {
           await checkout(cartItems);
@@ -75,36 +87,27 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       };
       
       
-
+      //PERSISTENCIA DEL CARRITO
     useEffect(() => {
-        
-        if (typeof window !== "undefined") {
-            const storedCart = localStorage.getItem("cartItems");
-            if (storedCart) {
+     if (typeof window !== "undefined") {
+     const storedCart = localStorage.getItem("cartItems");
+              if (storedCart) {
                 setCartItems(JSON.parse(storedCart));
             }
         }
     }, []);
 
+    //ACTUALIZAR EL TOTAL
     useEffect(() => {
-       
-        const totalAmount = cartItems.reduce((acc, item) => acc + item.price, 0);
-        setTotal(totalAmount);
+     const totalAmount = cartItems.reduce((acc, item) => acc + item.price, 0);
+     setTotal(totalAmount);
 
         if (typeof window !== "undefined") {
             localStorage.setItem("cartItems", JSON.stringify(cartItems));
         }
     }, [cartItems]);
 
-    const addToCart = async (product: number) => {
-        const updatedCart = await addItem(cartItems, product);
-        setCartItems(updatedCart);
-    };
 
-    const removeFromCart = (product: number) => {
-        const updatedCart = removeItem(cartItems, product);
-        setCartItems(updatedCart);
-    };
 
     return (
         <CartContext.Provider

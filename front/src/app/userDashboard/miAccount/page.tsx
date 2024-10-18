@@ -7,8 +7,16 @@ import { useRouter } from 'next/navigation'
 import ButtonAdvert from '@/components/buttons/ButtonAdvert';
 
 export default function MiAccount() {
-  const { user, logOut, getOrders } = useContext(UserContext);
+  const { user, logOut, getOrders, isLogged} = useContext(UserContext);
   const router = useRouter();
+//si no esta logueado ir a loguin
+
+useEffect(() => {
+  if(!isLogged) {
+    router.push("/userDashboard/login")
+  }
+}, [])
+
 
 
   useEffect(() => {

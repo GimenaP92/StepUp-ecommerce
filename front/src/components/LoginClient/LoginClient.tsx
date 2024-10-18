@@ -5,6 +5,7 @@ import Button from "../buttons/Button";
 import { ILoginClientProps } from "@/interfaces/interfaces";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/context/user";
+import Link from "next/link";
 
 export default function LoginClient({ setToken }: ILoginClientProps) {
     const router = useRouter();
@@ -58,35 +59,55 @@ export default function LoginClient({ setToken }: ILoginClientProps) {
       }
     };
 
+  
     return (
-      <div className="text-center">
-        <h1 className="text-2xl mt-2 mb-4 bg-customBgCard border border-gray-300 p-2 w-2/4 mx-auto">
-          Ingresa a tu cuenta para comprar nuestros productos
-        </h1>
-        <form onSubmit={onSubmit} className="flex flex-col md:w-2/4 mx-auto border border-gray-300 shadow p-8 m-10 rounded mb-8">
-          <label htmlFor="email"></label>
-          <input
-            name="email"
-            type="email"
-            value={userData.email}
-            onChange={handleChange}
-            placeholder="email"
-            className="w-3/4 mx-auto border-b-2 bg-purple-100 border-gray-300 focus:outline-none focus:border-gray-500 mb-4"
-          />
-          {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
-          <label htmlFor="password"></label>
-          <input
-            name="password"
-            type="password"
-            value={userData.password}
-            onChange={handleChange}
-            placeholder="contraseña"
-            className="w-3/4 mx-auto border-b-2 bg-purple-100 border-gray-300 focus:outline-none focus:border-gray-500 mb-4"
-          />
-          {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
-          <Button text="Ingresar" disabled={Object.keys(errors).length > 0} type="submit"/>
-        </form>
-        <Button text="¿No posees una cuenta? Haz click aqui para registrarse" onClick={handleRegisterRedirect} />
+      <div className="mt-20 bg-customBgPage text-center flex items-center justify-center">
+        <div className="w-full md:w-2/4 px-6">
+          <h1 
+            className="text-xl md:text-2xl mt-4 mb-8 text-[#333] 
+                       border-l-4 border-customHoverButton p-4 bg-customBgPage
+                       shadow-md rounded-md">
+            Ingresa a tu cuenta para comprar nuestros productos
+          </h1>
+    
+          <form
+            onSubmit={onSubmit}
+            className="flex flex-col gap-6 bg-gradient-to-br bg-customBgPage
+                       md:w-full mx-auto border border-gray-300 shadow-lg p-8 rounded-lg"
+          >
+            <input
+              name="email"
+              type="email"
+              value={userData.email}
+              onChange={handleChange}
+              placeholder="Correo electrónico"
+              className="w-full border-b-2 border-gray-300 bg-[#F5F5F5] 
+                         focus:border-[#353534] focus:outline-none py-3 px-4 rounded-sm transition"
+            />
+            {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
+    
+            <input
+              name="password"
+              type="password"
+              value={userData.password}
+              onChange={handleChange}
+              placeholder="Contraseña"
+              className="w-full border-b-2 border-gray-300 bg-[#F5F5F5] 
+                         focus:border-[#353534] focus:outline-none py-3 px-4 rounded-sm transition"
+            />
+            {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
+    
+            <Button text="Ingresar" disabled={Object.keys(errors).length > 0} type="submit" />
+          </form>
+    
+          <Link
+            href="/userDashboard/register"
+            className="mt-6 inline-block text-[#333] hover:text-white hover:bg-customHoverButton 
+                       px-4 py-2 rounded transition-colors duration-300"
+          >
+            ¿No posees una cuenta? Haz click aquí para registrarse
+          </Link>
+        </div>
       </div>
     );
-}
+  }    

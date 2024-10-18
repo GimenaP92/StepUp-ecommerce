@@ -19,8 +19,6 @@ function CartComponent() {
       };
       
       
-  
-
   return (
       <div className="flex flex-col text-center justify-between w-full">
           {cartItems.length > 0 ? (

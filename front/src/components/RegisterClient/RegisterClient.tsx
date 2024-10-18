@@ -67,72 +67,94 @@ export default function Register() {
     setSubmissionError("Hubo un error en el registro. Inténtalo de nuevo.");
   }
 };
-
-  return (
-    <div className="text-center">
-      <h1 className="text-2xl mt-2 mb-4 bg-customBgCard border border-gray-300 p-2 w-2/4 mx-auto">
+return (
+  <div className="mt-20 bg-customBgPage text-center flex items-center justify-center">
+    <div className="w-full md:w-2/4 px-6">
+      <h1 className="text-xl md:text-2xl mt-4 mb-8 text-[#333] 
+                    border-l-4 border-customHoverButton p-4 bg-customBgPage
+                    shadow-md rounded-md">
         Regístrate para poder realizar compras 😊
       </h1>
-      <form onSubmit={onSubmit} className="flex flex-col md:w-2/4 mx-auto border border-gray-300 shadow p-8 m-10 rounded mb-8">
-        <label htmlFor="name"></label>
-        <input
-          name="name"
-          type="text"
-          value={userRegister.name}
-          onChange={handleChange}
-          placeholder="nombre"
-          className="w-3/4 mx-auto border-b-2 bg-purple-100 border-gray-300 focus:outline-none focus:border-gray-500 mb-4"
-        />
-        {errors.name && <span className="text-red-500 text-sm">{errors.name}</span>}
 
-        <label htmlFor="email"></label>
-        <input
-          name="email"
-          type="email"
-          value={userRegister.email}
-          onChange={handleChange}
-          placeholder="email"
-          className="w-3/4 mx-auto border-b-2 bg-purple-100 border-gray-300 focus:outline-none focus:border-gray-500 mb-4"
-        />
-        {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
+      <form 
+        onSubmit={onSubmit}
+        className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gradient-to-br bg-customBgPage 
+                   mx-auto border border-gray-300 shadow-lg p-8 rounded-lg"
+      >
+        <div className="flex flex-col">
+          <input
+            name="name"
+            type="text"
+            value={userRegister.name}
+            onChange={handleChange}
+            placeholder="Nombre"
+            className="w-full border-b-2 border-gray-300 bg-[#F5F5F5] 
+                       focus:border-[#353534] focus:outline-none py-3 px-4 rounded-sm transition"
+          />
+          {errors.name && <span className="text-red-500 text-sm">{errors.name}</span>}
+        </div>
 
-        <label htmlFor="password"></label>
-        <input
-          name="password"
-          type="password"
-          value={userRegister.password}
-          onChange={handleChange}
-          placeholder="password"
-          className="w-3/4 mx-auto border-b-2 bg-purple-100 border-gray-300 focus:outline-none focus:border-gray-500 mb-4"
-        />
-        {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
+        <div className="flex flex-col">
+          <input
+            name="email"
+            type="email"
+            value={userRegister.email}
+            onChange={handleChange}
+            placeholder="Correo electrónico"
+            className="w-full border-b-2 border-gray-300 bg-[#F5F5F5] 
+                       focus:border-[#353534] focus:outline-none py-3 px-4 rounded-sm transition"
+          />
+          {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
+        </div>
 
-        <label htmlFor="address"></label>
-        <input
-          name="address"
-          type="text"
-          value={userRegister.address}
-          onChange={handleChange}
-          placeholder="dirección"
-          className="w-3/4 mx-auto border-b-2 bg-purple-100 border-gray-300 focus:outline-none focus:border-gray-500 mb-4"
-        />
-        {errors.address && <span className="text-red-500 text-sm">{errors.address}</span>}
+        <div className="flex flex-col">
+          <input
+            name="password"
+            type="password"
+            value={userRegister.password}
+            onChange={handleChange}
+            placeholder="Contraseña"
+            className="w-full border-b-2 border-gray-300 bg-[#F5F5F5] 
+                       focus:border-[#353534] focus:outline-none py-3 px-4 rounded-sm transition"
+          />
+          {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
+        </div>
 
-        <label htmlFor="phone"></label>
-        <input
-          name="phone"
-          type="tel"
-          value={userRegister.phone}
-          onChange={handleChange}
-          placeholder="celular"
-          className="w-3/4 mx-auto border-b-2 bg-purple-100 border-gray-300 focus:outline-none focus:border-gray-500 mb-4"
-        />
-        {errors.phone && <span className="text-red-500 text-sm">{errors.phone}</span>}
-        
-        <Button text="Registrarme"  type="submit" disabled={Object.keys(errors).length > 0} />
+        <div className="flex flex-col">
+          <input
+            name="address"
+            type="text"
+            value={userRegister.address}
+            onChange={handleChange}
+            placeholder="Dirección"
+            className="w-full border-b-2 border-gray-300 bg-[#F5F5F5] 
+                       focus:border-[#353534] focus:outline-none py-3 px-4 rounded-sm transition"
+          />
+          {errors.address && <span className="text-red-500 text-sm">{errors.address}</span>}
+        </div>
+
+        <div className="flex flex-col">
+          <input
+            name="phone"
+            type="tel"
+            value={userRegister.phone}
+            onChange={handleChange}
+            placeholder="Celular"
+            className="w-full border-b-2 border-gray-300 bg-[#F5F5F5] 
+                       focus:border-[#353534] focus:outline-none py-3 px-4 rounded-sm transition"
+          />
+          {errors.phone && <span className="text-red-500 text-sm">{errors.phone}</span>}
+        </div>
+
+        <div className="md:col-span-2">
+          <Button text="Registrarme" type="submit" disabled={Object.keys(errors).length > 0} />
+        </div>
       </form>
+
       {submissionError && <p className="text-red-500 text-sm">{submissionError}</p>}
-      <Button text="¿Ya posees una cuenta? Haz click para ingresar" onClick={handleLoginRedirect}/>
-       </div>
-  );
+
+      <Button text="¿Ya posees una cuenta? Haz click para ingresar" onClick={handleLoginRedirect} />
+    </div>
+  </div>
+);
 }
