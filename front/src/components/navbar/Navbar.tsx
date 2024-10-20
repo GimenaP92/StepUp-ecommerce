@@ -13,7 +13,6 @@ export default function Navbar() {
     <nav className=" bg-customBgPromos  text-customText font-mono p-2 py-4 w-full">
       <div className="container mx-auto">
         <ul className="flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0">
-          {/* Sección de navegación principal */}
           <div className="flex flex-col md:flex-row md:space-x-4">
             <li>
               <Link href="/" className="hover:text-gray-300 transition duration-200">
@@ -27,7 +26,7 @@ export default function Navbar() {
             </li>
             <li className="flex items-center">
               <Link href="/cart" className="hover:text-gray-300 flex items-center space-x-2 transition duration-200">
-                <span>CARRITO</span>
+                <span>CART</span>
                 <BsCart2 />
               </Link>
             </li>
@@ -40,7 +39,7 @@ export default function Navbar() {
                 href="/userDashboard/miAccount" 
                 className="flex items-center space-x-2 hover:text-gray-300 transition duration-200"
               >
-                <span>MI CUENTA</span>
+                <span>MY ACCOUNT</span>
                 <BsFillPersonFill />
               </Link>
             ) : (

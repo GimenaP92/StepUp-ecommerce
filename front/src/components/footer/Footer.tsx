@@ -8,7 +8,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           {/* Columna 1: Contáctame y Redes Sociales */}
           <div className="flex flex-col items-center lg:items-start">
-            <h2 className="text-2xl font-bold text-white">Contáctame</h2>
+            <h2 className="text-2xl font-bold text-white">Contact me</h2>
             {/* Iconos de Redes Sociales */}
             <ul className="flex justify-center gap-6 mt-4 lg:justify-start">
               <li>

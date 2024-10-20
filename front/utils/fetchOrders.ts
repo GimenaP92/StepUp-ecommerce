@@ -18,7 +18,7 @@ export async function fetchUserOrders(token: string) {
 
 export async function fetchPostUserOrders(products: number[], token: string) {
     try {
-      const response = await fetch(`htpp://localhost:3000/orders`, {
+      const response = await fetch(`http://localhost:3000/orders`, {
         method: "POST",
         headers: {
           "Authorization": `${token}`,

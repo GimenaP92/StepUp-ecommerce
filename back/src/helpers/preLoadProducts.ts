@@ -1,5 +1,6 @@
 import { AppDataSource } from "../config/dataSource";
 import { Product } from "../entities/Product";
+import { CategoryRepository } from "../repositories/category.respository";
 import { ProductRepository } from "../repositories/product.repository";
 
 interface IProduct {
@@ -9,6 +10,7 @@ interface IProduct {
   image: string;
   categoryId: number;
   stock: number;
+  categoryName?: string; // Agregar categoryName como opcional
 }
 
 const productsToPreLoad: IProduct[] = [
@@ -20,7 +22,7 @@ const productsToPreLoad: IProduct[] = [
       "El deporte del tenis a máxima velocidad tiene un nuevo look. Ponete estas zapatillas adidas adizero Cybersonic para mantenerte un paso adelante en las canchas de superficie dura. Las varillas ENERGYRODS livianas permiten cambios rápidos de dirección, mientras que la mediasuela Lightstrike de doble densidad y bajo perfil está diseñada para mantenerte siempre en el lugar y en el momento adecuados. El exterior de malla incorpora una zona de abrasión Adituff hecha con un 60% de Boost reciclada que te permite exigirte al máximo en la cancha sin preocuparte por el desgaste.",
     image:
       "https://res.cloudinary.com/dbtfna8ev/image/upload/v1724693412/adizero_fctbiw.webp",
-    categoryId: 1,
+    categoryId: 2,
     stock: 10,
   },
   {
@@ -40,7 +42,7 @@ const productsToPreLoad: IProduct[] = [
       "Galardonadas con el premio Women's Health al mejor calzado de running en todos los niveles, hemos diseñado las Supernova Rise para mantenerte cómoda kilómetro tras kilómetro. Con tecnología Dreamstrike+, la mediasuela está amortiguada con una espuma rediseñada. Nuestro sistema de varillas de soporte de espuma más densa proporciona una transición sin preocupaciones del talón a la punta. Por último, el ajuste cómodo en el talón combina espuma acolchada y tejido suave para un ajuste más seguro que se siente como si el calzado estuviera abrazando tu talón. Supercómodas. Supernova. Conseguí las tuyas ahora",
     image:
       "https://res.cloudinary.com/dbtfna8ev/image/upload/v1724764137/Supernova_Rise_ardt2z.webp",
-    categoryId: 3,
+    categoryId: 2,
     stock: 10,
   },
   {
@@ -50,7 +52,7 @@ const productsToPreLoad: IProduct[] = [
       "Las zapatillas de running Adizero SL seleccionan lo mejor de nuestra franquicia Adizero que rompe récords mundiales. La mediasuela de EVA LIGHTSTRIKE liviana ofrece resiliencia a la mediasuela para que puedas concentrarte en el próximo paso, mientras que el exterior está hecho de una malla técnica suave que está zonificada en áreas clave. El talón acolchado y la lengüeta brindan una comodidad óptima junto con el antepié Adizero. La suela premium está diseñada para proporcionar tracción",
     image:
       "https://res.cloudinary.com/dbtfna8ev/image/upload/v1724764136/ADIZERO_SL_Rojo_npxnqt.webp",
-    categoryId: 4,
+    categoryId: 2,
     stock: 10,
   },
   {
@@ -60,7 +62,7 @@ const productsToPreLoad: IProduct[] = [
       "Hemos diseñado las Supernova Rise para ofrecer máxima comodidad en cada paso. Nuestra tecnología Dreamstrike+ amortigua la mediasuela con ​una espuma rediseñada. ¿Sabes qué la hace tan increíble? Ofrece el equilibrio perfecto entre comodidad y soporte para mantenerte cómodo kilómetro tras kilómetro. Además, tiene un sistema de varillas de soporte de espuma más densa, lo que significa que tendrás una transición libre de preocupaciones del talón hasta la punta. Por último, nuestro Comfort Heel Fit combina espuma acolchada y tejido suave para un ajuste más seguro que se siente como si el calzado estuviera abrazando tu talón",
     image:
       "https://res.cloudinary.com/dbtfna8ev/image/upload/v1724764138/Supernova_iztuht.webp",
-    categoryId: 5,
+    categoryId: 2,
     stock: 10,
   },
   {
@@ -70,7 +72,7 @@ const productsToPreLoad: IProduct[] = [
       "Las Adizero Adios Pro 3 son la máxima expresión de los productos Adizero Racing. Fueron diseñadas con y para atletas para lograr hazañas increíbles. Estas zapatillas de running adidas están diseñadas para optimizar la eficiencia del running. Nuestras varillas ENERGYRODS de carbono ofrecen ligereza y firmeza para pasos ágiles y eficientes. La tecnología LIGHTSTRIKE PRO ultraliviana amortigua cada paso con las tres capas de espuma resistente que te ayudan a mantener la energía a largo plazo. Todo sobre una delgada suela de caucho textil para un agarre extraordinario en condiciones mojadas y secas",
     image:
       "https://res.cloudinary.com/dbtfna8ev/image/upload/v1724764137/Adios_Pro_qle0iu.webp",
-    categoryId: 6,
+    categoryId: 2,
     stock: 10,
   },
   {
@@ -80,7 +82,7 @@ const productsToPreLoad: IProduct[] = [
       "Estas zapatillas de running adidas están diseñadas para acompañarte en tus carreras más largas hasta el momento. La mediasuela de doble densidad incluye tecnología REPETITOR suave y ligera y tecnología REPETITOR+ más firme que abraza el talón para brindar soporte y estabilidad. La silueta curvada con curvatura genera pasos suaves e impulso hacia adelante, impulsándote hacia tu próximo paso.",
     image:
       "https://res.cloudinary.com/dbtfna8ev/image/upload/v1724764137/Adistar_Repetitor_ienswh.webp",
-    categoryId: 6,
+    categoryId: 2,
     stock: 10,
   },
   {
@@ -90,18 +92,32 @@ const productsToPreLoad: IProduct[] = [
       "No importa a donde corras, tomate un momento para apreciar la belleza que te rodea. Ese es el mensaje de estas zapatillas de running adidas. Ya sea que estés entrenando para tu primera carrera de 5K o corriendo de manera casual los fines de semana, cumplen con todo lo necesario para brindarte comodidad y soporte. La mediasuela Dreamstrike+ ofrece amortiguación suave que te mantiene en movimiento.",
     image:
       "https://res.cloudinary.com/dbtfna8ev/image/upload/v1724764137/Stride_Move_kivzfv.webp",
-    categoryId: 6,
+    categoryId: 2,
     stock: 10,
   },
 ];
 
+
 export const preLoadProducts = async () => {
   const products = await ProductRepository.find();
-  if (!products.length)
-    await AppDataSource.createQueryBuilder()
-      .insert()
-      .into(Product)
-      .values(productsToPreLoad)
-      .execute();
-  console.log("Products preloaded");
+  if (!products.length) {
+    for (const productData of productsToPreLoad) {
+      const category = await CategoryRepository.findOne({
+        where: { id: productData.categoryId },
+      });
+
+      if (!category) {
+        console.error(`Category with ID ${productData.categoryId} not found.`);
+        continue; // Si no existe la categoría, omitimos el producto.
+      }
+
+      const product = ProductRepository.create({
+        ...productData,
+        category,
+      });
+
+      await ProductRepository.save(product);
+    }
+    console.log("Products preloaded");
+  }
 };

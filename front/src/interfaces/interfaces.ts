@@ -9,6 +9,7 @@ export interface IProduct {
     image:string;
     categoryId:number;
 }
+ 
 
 
 export interface IProductDetailProps extends IImage {
@@ -126,4 +127,10 @@ export interface IImage {
 
 export interface INotificationProps {
     message: string; 
+  }
+
+  export interface IProductCategory {
+    id: number;
+    name: string;
+    imageUrl: string;
   }

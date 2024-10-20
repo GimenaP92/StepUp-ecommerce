@@ -18,3 +18,9 @@ export const getProductByIdService = async(id:number):Promise<Product | null> =>
  })
  return product;
 }
+
+
+export const getProductsByCategoryId = async (categoryId: number) => {
+  const products = await ProductRepository.find({ where: { categoryId } });
+  return products;
+};
