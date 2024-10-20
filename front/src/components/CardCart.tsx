@@ -26,7 +26,7 @@ function CardCart({ product, remove }: IProductCardProp) {
           </div>
         </div>
         <div className="flex flex-col md:flex-row items-center justify-between md:w-1/2">
-          <p className="text-sm font-semibold text-center mb-2 md:mb-0 md:mr-2">Price: ${product.price}</p>
+          <p className="text-sm font-semibold text-center mb-2 md:mb-0 md:mr-2"> ${product.price}</p>
           <button
             onClick={remove}
             className="bg-red-500 text-white px-3 py-1 rounded flex items-center justify-center"

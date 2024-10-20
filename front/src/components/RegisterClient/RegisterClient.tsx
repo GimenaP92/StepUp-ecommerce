@@ -4,11 +4,14 @@ import { useRouter } from "next/navigation"
 import Button from "../buttons/Button";
 import { validateRegister } from "../../../utils/validationRegister";
 import { UserContext } from "@/context/user";
+import { NotificationCart } from "../Notifications/NotifCart";
 
 
 export default function Register() {
   const router = useRouter();
-  const {signUp} = useContext(UserContext)
+  const {signUp} = useContext(UserContext);
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
   const [userRegister, setUserRegister] = useState({
     name: "",
     email: "",
@@ -50,7 +53,11 @@ export default function Register() {
   try {
     const success = await signUp(user);
     if (success) {
-      alert("Registro exitoso");
+      setNotificationMessage("Registro exitoso");
+      setShowNotification(true);
+      setTimeout(() => {
+        router.push("/home"); 
+      }, 3000); 
       setUserRegister({
         name: "",
         email: "",
@@ -58,7 +65,6 @@ export default function Register() {
         address: "",
         phone: "",
       });
-      router.push("/home");
     } else {
       setSubmissionError("Hubo un error en el registro. Inténtalo de nuevo.");
     }
@@ -155,6 +161,13 @@ return (
 
       <Button text="¿Ya posees una cuenta? Haz click para ingresar" onClick={handleLoginRedirect} />
     </div>
+    {showNotification && (
+        <div className="absolute top-12 left-0 right-0 mx-auto w-max">
+          <NotificationCart
+            message={notificationMessage}
+          />
+        </div>
+      )}
   </div>
 );
 }

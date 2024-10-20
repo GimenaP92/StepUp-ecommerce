@@ -6,6 +6,7 @@ import { ILoginClientProps } from "@/interfaces/interfaces";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/context/user";
 import Link from "next/link";
+import { NotificationCart } from "../Notifications/NotifCart";
 
 export default function LoginClient({ setToken }: ILoginClientProps) {
     const router = useRouter();
@@ -15,7 +16,9 @@ export default function LoginClient({ setToken }: ILoginClientProps) {
       password: ""
     });
     const [errors, setErrors] = useState({} as { [key: string]: string });
-    
+    const [showNotification, setShowNotification] = useState(false);
+    const [notificationMessage, setNotificationMessage] = useState("");
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
       setUserData({ ...userData, [name]: value });
@@ -45,11 +48,24 @@ export default function LoginClient({ setToken }: ILoginClientProps) {
           if (success) {
             const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
             if (token) {
+              setNotificationMessage(
+                "Has ingresado correctamente"
+              );
+              setShowNotification(true);
+              setTimeout(() => {
+                setShowNotification(false);
+              }, 3000);
               setToken(token); 
               router.push("/home");
             }
           } else {
-            alert("Usuario inválido");
+             setNotificationMessage(
+        "Usuario Inválido"
+      );
+      setShowNotification(true);
+      setTimeout(() => {
+        setShowNotification(false);
+      }, 3000);
           }
         } catch(error) {
           setErrors(errors);
@@ -108,6 +124,13 @@ export default function LoginClient({ setToken }: ILoginClientProps) {
             ¿No posees una cuenta? Haz click aquí para registrarse
           </Link>
         </div>
+        {showNotification && (
+        <div className="absolute top-12 left-0 right-0 mx-auto w-max">
+          <NotificationCart
+            message={notificationMessage}
+          />
+        </div>
+      )}
       </div>
     );
   }    

@@ -5,11 +5,13 @@ import { UserProfile } from '../UserProfile';
 import { UserOrder } from '../UserOrders';
 import { useRouter } from 'next/navigation'
 import ButtonAdvert from '@/components/buttons/ButtonAdvert';
+import { NotificationCart } from '@/components/Notifications/NotifCart';
 
 export default function MiAccount() {
   const { user, logOut, getOrders, isLogged} = useContext(UserContext);
   const router = useRouter();
-//si no esta logueado ir a loguin
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
 
 useEffect(() => {
   if(!isLogged) {
@@ -29,13 +31,21 @@ useEffect(() => {
   const logOutHandler = () => {
     try {
       logOut();
-      alert("Has cerrado tu sesión correctamente");
-      router.push("/userDashboard/login");
+      setNotificationMessage("Has cerrado tu sesión correctamente");
+      setShowNotification(true);
+      setTimeout(() => {
+        router.push("/userDashboard/login"); 
+      }, 3000); 
     } catch (error) {
       console.error(error);
-      alert("Hubo un error al cerrar sesión");
+      setNotificationMessage("Hubo un error al cerrar sesión");
+      setShowNotification(true);
+      setTimeout(() => {
+        setShowNotification(false);
+      }, 3000);
     }
-  }
+  };
+  
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 sm:p-6 lg:p-8">
@@ -69,6 +79,13 @@ useEffect(() => {
           </p>
         )}
       </div>
+      {showNotification && (
+        <div className="absolute top-12 left-0 right-0 mx-auto w-max">
+          <NotificationCart
+            message={notificationMessage}
+          />
+        </div>
+      )}
     </div>
   );
 }

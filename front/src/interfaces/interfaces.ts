@@ -113,6 +113,8 @@ export interface IUserContextType {
     setOrders: (orders: IOrderResponse[]) => void; 
     orders: IOrderResponse[] | [];
     logOut: () => void;
+    cartItems: IProduct[];
+    addToCart: (item: IProduct) => void;
 }
 
 export interface IImage {
@@ -121,3 +123,7 @@ export interface IImage {
     width: number,
     height: number
 }
+
+export interface INotificationProps {
+    message: string; 
+  }

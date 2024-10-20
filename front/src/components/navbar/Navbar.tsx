@@ -10,7 +10,7 @@ export default function Navbar() {
   const { isLogged } = useContext(UserContext);
 
   return (
-    <nav className="bg-customBg text-customText font-mono p-2 py-4 w-full">
+    <nav className=" bg-customBgPromos  text-customText font-mono p-2 py-4 w-full">
       <div className="container mx-auto">
         <ul className="flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0">
           {/* Sección de navegación principal */}

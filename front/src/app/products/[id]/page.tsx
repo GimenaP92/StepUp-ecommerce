@@ -1,6 +1,6 @@
 import React from "react";
+import Image from "next/image"; // Importa el componente Image de Next.js
 import AddToCart from "@/components/buttons/AddToCart";
-import ImageProduct from "@/components/Images/ImageProducts";
 import { fetchProductDetail } from "../../../../utils/fetchProducts";
 
 async function ProductDetail({ params }: { params: { id: string } }) {
@@ -9,28 +9,31 @@ async function ProductDetail({ params }: { params: { id: string } }) {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="border shadow-lg border-gray-300 p-4 m-4 rounded-lg max-w-xs md:max-w-3xl w-full">
-        <h1 className="text-3xl font-bold bg-customBg text-customText p-4 mb-4 text-center w-full">
-          {name}
-        </h1>
-        <div className="flex flex-col md:flex-row md:items-center mb-4">
-          <div className="flex justify-center md:w-1/2">
-            <ImageProduct 
-              src={image}
-              alt={name}
-              width={400}  
-              height={400}
-            />
-          </div>
-          <div className="md:w-1/2 md:ml-6 mt-4 md:mt-0">
-            <p className="text-sm">{description}</p>
-            <p className="text-sm font-semibold mt-2">Price: ${price}</p>
-          </div>
+      <a href="#" className="group block overflow-hidden">
+        <div className="relative h-[350px] sm:h-[450px]">
+          <Image
+            src={image} // Imagen del producto obtenida desde los detalles del producto
+            alt={name} // Usamos el nombre del producto como texto alternativo
+            layout="fill" // Permite que la imagen llene su contenedor
+            objectFit="cover" // Mantiene la proporción de la imagen
+            className="absolute inset-0 opacity-100 group-hover:opacity-0"
+            priority // Carga la imagen de manera prioritaria
+          />
+          
         </div>
-        <div className="flex justify-center">
+
+        <div className="relative bg-white pt-3">
+          <h3 className="text-lg font-semibold text-gray-800 group-hover:underline group-hover:underline-offset-4">
+            {name} {/* Nombre del producto */}
+          </h3>
+
+          <p className="mt-1.5 tracking-wide text-gray-900">${price}</p>
+          <p className="mt-1.5 text-gray-600">{description}</p> {/* Descripción del producto */}
+        </div>
+        <div className="flex justify-center mt-4">
           <AddToCart id={product.id} />
         </div>
-      </div>
+      </a>
     </div>
   );
 }
