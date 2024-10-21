@@ -15,6 +15,9 @@ Es un **e-commerce** que permite a los usuarios:
 - **Notificaciones y alertas**: SweetAlert2  
 - **Backend**: Express, PostgreSQL  
 
+## Recorrido
+-Puedes ver el video aqui: https://www.linkedin.com/posts/gimena-pascuale_quiero-presentarles-un-breve-recorrido-por-activity-7254140635132162048-i9_-?utm_source=share&utm_medium=member_desktop
+
 ## Demo 🌐  
 *En construcción, próximamente podrás verlo.*  
 - **Deploy Frontend**: [StepUp en Render](https://tu-frontend-en-render.com)  
