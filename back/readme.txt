@@ -1,10 +1,13 @@
+
+
 PORT=3000
-DB_HOST=dpg-crbs2irqf0us73dg0o20-a
+DB_HOST=localhost
 DB_PORT=5432 
-DB_USER=gimefront
-DB_PASSWORD=7yQZB4DiDmyyh1o5HOJz2HSBeDM02qhe
-DB_NAME=frontm4_ya3w
+DB_USER=postgres
+DB_PASSWORD=Programacion123!
+DB_NAME=frontm4
 JWT_SECRET=mi_secreto_super_seguro_6598*
 
 CLOUDINARY_CLOUD_NAME=dbtfna8ev
 CLOUDINARY_API_KEY=673958199829668
+CLOUDINARY_API_SECRET=ydYrpdoEMOnckmx_7T9FTiWbmVU

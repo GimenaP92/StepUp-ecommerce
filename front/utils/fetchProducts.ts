@@ -6,7 +6,7 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export async function fetchProducts(): Promise<IProduct[]> {
     try {
-        const response = await fetch(`http://localhost:3000/products/`, {
+        const response = await fetch(`${apiUrl}/products/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ export async function fetchProducts(): Promise<IProduct[]> {
 
 export async function fetchProductDetail(id:string): Promise<IProduct> {
     try {
-        const response = await fetch(`http://localhost:3000/products/${id}`, {
+        const response = await fetch(`${apiUrl}/products/${id}`, {
             cache: "no-cache"
         });
         if (!response.ok) {
