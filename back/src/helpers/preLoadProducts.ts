@@ -10,18 +10,97 @@ interface IProduct {
   image: string;
   categoryId: number;
   stock: number;
-  categoryName?: string; // Agregar categoryName como opcional
+  categoryName?: string; 
 }
 
 const productsToPreLoad: IProduct[] = [
-  
   {
-    name: "Adizero",
-    price: 25999,
+    name: "Ekiden",
+    price: 85999,
     description:
-      "El deporte del tenis a máxima velocidad tiene un nuevo look. Ponete estas zapatillas adidas adizero Cybersonic para mantenerte un paso adelante en las canchas de superficie dura. Las varillas ENERGYRODS livianas permiten cambios rápidos de dirección, mientras que la mediasuela Lightstrike de doble densidad y bajo perfil está diseñada para mantenerte siempre en el lugar y en el momento adecuados. El exterior de malla incorpora una zona de abrasión Adituff hecha con un 60% de Boost reciclada que te permite exigirte al máximo en la cancha sin preocuparte por el desgaste.",
+      "Una remera de alto rendimiento es esencial en el guardarropa de todo corredor, y la remera de Running Ekiden (Unisex) no es la excepción.",
     image:
-      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1724693412/adizero_fctbiw.webp",
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729475068/Remera_Ekiden_smnqgp.webp",
+    categoryId: 1,
+    stock: 10,
+  },
+  {
+    name: "Essentials",
+    price: 40999,
+    description:
+      "Confeccionada en un tejido ultraligero con un ajuste estilizado, esta prenda para uso diario luce un logo reflectivo que se encarga de hacerte visible en todo momento. La tecnología de absorción adidas AEROREADY mantiene tu piel fresca y seca en todo momento.",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729475250/Remera_Essentials_hcuhim.avif",
+    categoryId: 1,
+    stock: 10,
+  },
+  {
+    name: "Power",
+    price: 64999,
+    description:
+      "Enfrentate a cada repetición con esta camiseta adidas. Diseñada para entrenamientos de fuerza de alta intensidad, la tecnología AEROREADY mantiene tu cuerpo seco y cómodo. Las 3 Tiras verticales en la espalda dejan en claro que llegaste para dominar tu entrenamiento",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729475673/Remera_Power_vj1xsn.avif",
+    categoryId: 1,
+    stock: 10,
+  },
+  {
+    name: "Aerorady",
+    price: 51999,
+    description:
+      "Sin importar si estás corriendo por el asfalto o corriendo en la pista, esta remera de running mantiene tu cuerpo cómodo mientras superás tus límites. La tecnología AEROREADY absorbe la humedad para mantener tu cuerpo seco y cómodo durante tus entrenamientos más intensos. Los detalles reflectivos te hacen visible en condiciones de poca luz. ",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729475980/Remera_AEROREADY_cqpmiv.avif",
+    categoryId: 1,
+    stock: 10,
+  },
+  {
+    name: "Airchill",
+    price: 70999,
+    description:
+      "Esta remera de running adidas está diseñada para inspirarte a salir a correr y experimentar las vistas y los sonidos de la naturaleza. El tejido absorbente AEROREADY y la ventilación integrada mantienen tu piel seca y fresca kilómetro tras kilómetro.",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729476205/Remera_Airchill_zkm0os.avif",
+    categoryId: 1,
+    stock: 10,
+  },
+  {
+    name: "Adizero Running",
+    price: 79999,
+    description:
+      "Mantene la concentración y superá tus límites con esta remera de running. La tecnología AEROREADY absorbe la humedad de tu cuerpo para mantener tu cuerpo seco y cómodo mientras corrés cualquier distancia. Su diseño liviano con malla te brinda transpirabilidad incluso cuando aumentás el ritmo.",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729476444/Remera_Run_It_cc2sgj.avif",
+    categoryId: 1,
+    stock: 10,
+  },
+  {
+    name: "Otr E 3S",
+    price: 59999,
+    description:
+      "Otr E 3S Tee es un nuevo producto para Mujer. Te invitamos a ver las imágenes para apreciar más detalles desde diferentes ángulos. Si ya conocés Otr E 3S Tee podés dejar una reseña abajo; siempre nos encanta conocer tu opinión.",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729476329/OTR_E_3S_xf6j5k.avif",
+    categoryId: 1,
+    stock: 10,
+  },
+  {
+    name: "Ultimate",
+    price: 70999,
+    description:
+      "Diseñada para seguirle el ritmo a tu carrera, esta remera de running está hecha con tecnología HEAT.RDY para garantizar que tu cuerpo se mantenga fresco y cómodo kilómetro tras kilómetro. Las uniones en el dobladillo y las mangas aseguran movimientos libres de rozaduras, y los detalles reflectivos brillan en condiciones de poca luz. Este producto está hecho con materiales 100% reciclados. Utilizando materiales reciclados disminuimos los residuos, nuestra dependencia de los recursos finitos y la huella que generan los productos que fabricamos.",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729476573/Remera_Ultimate_ruobwd.avif",
+    categoryId: 1,
+    stock: 10,
+  },
+  {
+    name: "Run It",
+    price: 40999,
+    description:
+      "Dejá ver tu originalidad mientras ponés tu cuerpo en movimiento. La colección Run It celebra la expresión individual a la vez que te ayuda a progresar, empoderándote para sacarle el máximo provecho a tus carreras.",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729476444/Remera_Run_It_cc2sgj.avif",
     categoryId: 2,
     stock: 10,
   },
@@ -95,7 +174,128 @@ const productsToPreLoad: IProduct[] = [
     categoryId: 2,
     stock: 10,
   },
+  {
+    name: "Monogram",
+    price: 91999,
+    description:
+      "Estos shorts te permiten brillar con un estilo impecable. Están confeccionados en tejido jacquard texturizado y presentan una cintura con cordón para que los ajustés a tu medida. Su discreto estampado de monograma y las emblemáticas 3 Tiras a los lados mantienen la esencia del legado deportivo de la marca.",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729477002/Shorts_Monogram_Negro_IZ2534_21_model_peqrqb.avif",
+    categoryId: 3,
+    stock: 10,
+  },
+  {
+    name: "Classic Sprinter",
+    price: 91999,
+    description:
+      "El mundo sabe a quién representas cuando luces las 3 Tiras. Refrescá tus looks casuales con estos clásicos shorts sprinter. Son una versión contemporánea de un clásico de nuestros archivos. Su diseño liviano y cómodo incorpora tres bolsillos para que puedas guardar tus objetos personales.",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729477089/Shorts_Adicolor_Classics_Sprinter_Turquesa_IZ2414_21_model_vlovo0.avif",
+    categoryId: 3,
+    stock: 10,
+  },
+  {
+    name: "Firebird",
+    price: 63999,
+    description:
+      "Estos shorts son una versión moderna de un modelo original. Reinventados para el mundo de hoy e inspirados en los archivos icónicos, son una mezcla moderna y un ícono de estilo clásico. Con un corte holgado cómodo y confección en tejido de tricot liviano, te permiten moverte con libertad mientras rinden homenaje a la marca que comenzó todo. Los bolsillos laterales añaden practicidad mientras que el cordón de ajuste en la cintura elástica te brinda un ajuste personalizado.",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729477177/Shorts_Adicolor_Firebird_Negro_IU2368_21_model_e880dd.avif",
+    categoryId: 3,
+    stock: 10,
+  },
+  {
+    name: "Authentic",
+    price: 74999,
+    description:
+      "Ponete estos shorts de futbol de Argentina con el resto del uniforme alternativo para conseguir el look perfecto para la cancha. Su tejido ligero con tecnología de absorción AEROREADY se encarga de brindar comodidad dentro y fuera de la cancha.",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729477309/Shorts_Titular_Authentic_Argentina_24_Blanco_Blanco_IN6928_21_model_q30nuj.avif",
+    categoryId: 3,
+    stock: 10,
+  },
+  {
+    name: "Aeroready",
+    price: 52999,
+    description:
+      " El tejido con tecnología de absorción AEROREADY mantiene tu cuerpo seco de principio a fin sin importar la distancia o el ritmo. El bolsillo con cierre en la parte posterior te permite guardar geles para que puedas recargarte de energía durante la carrera. Los detalles reflectantes te hacen visible en condiciones de poca luz. ",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729477517/Shorts_Own_the_Run_Base_AEROREADY_Azul_IV5505_21_model_evbrqh.avif",
+    categoryId: 3,
+    stock: 10,
+  },
+  {
+    name: "Own the Run",
+    price: 52999,
+    description:
+      "Conquistá cada kilómetro con estos shorts de running. La tecnología de absorción AEROREADY mantiene tu cuerpo seco de principio a fin en cada entrenamiento. Los detalles reflectantes te mantienen visible cuando cae el sol. El bolsillo oculto para llaves te permite tener tus pertenencias esenciales siempre a la mano.",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729477601/Shorts_Con_Bloques_de_Color_Own_the_Run_Verde_IQ3869_21_model_ulrv0x.avif",
+    categoryId: 3,
+    stock: 10,
+  },
+  {
+    name: "Own",
+    price: 62999,
+    description:
+      "Aprovechá al máximo cada kilómetro. Estos shorts de running incorporan tecnología de absorción AEROREADY que mantiene tu piel seca y tu cuerpo cómodo sin importar la distancia recorrida. Los detalles reflectantes te hacen visible en condiciones de poca luz.",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729477750/Shorts_Own_the_Run_3_Tiras_Negro_IW0002_21_model_cjidso.avif",
+    categoryId: 3,
+    stock: 10,
+  },
+  {
+    name: "Running",
+    price: 67999,
+    description:
+      "Aumentá tu ritmo con estos shorts que pueden seguirte el paso. Estos shorts tejidos impulsan tu rendimiento con paneles de malla ubicados de manera estratégica para brindar ventilación donde más la necesitas. La cintura elástica te garantiza comodidad durante cualquier entrenamiento, mientras que los dobladillos sellados eliminan la irritación. Guardá tus llaves o una tarjeta en el bolsillo con cierre y conquistá tu circuito de entrenamiento sin distracciones.",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729477829/Shorts_Lux_Pacer_Tejidos_Elasticos_con_Bolsillo_de_Cierre_Gris_IS1668_21_model_ffql8u.avif",
+    categoryId: 3,
+    stock: 10,
+  },
+  {
+    name: "Ekiden",
+    price: 194999,
+    description:
+      "Elevá tu rendimiento con comodidad y estilo con la campera de running Ekiden. Presenta un ajuste ceñido y está confeccionada en tejido antidesgarre de poliamida reciclada. La campera cuenta con una capucha ajustable y un dobladillo para personalizar fácilmente. Incorpora detalles reflectivos para mayor visibilidad en tus carreras matutinas y nocturnas.",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729478005/Campera_de_Running_Ekiden_Violeta_IS0702_HM1_kpyezb.avif",
+    categoryId: 4,
+    stock: 10,
+  },
+  {
+    name: "Running",
+    price: 191999,
+    description:
+      "Empacá ligero. Movete rápido. La campera rompevientos Terrex Agravic Windweave Pro te mantiene motivado en los senderos durante los días de viento.",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729478088/Campera_Rompevientos_Terrex_Agravic_Windweave_Pro_Turquesa_IB1212_HM1_xn9qv5.avif",
+    categoryId: 4,
+    stock: 10,
+  },
+  {
+    name: "Aeroready",
+    price: 109999,
+    description:
+      "Alcanzá tus metas de fondo con esta campera de running. Confeccionada en tejido antidesgarre que resiste a condiciones climáticas variadas, su ajuste ceñido se adapta a tu cuerpo mientras corres. La tecnología AEROREADY absorbe la humedad para mantener tu cuerpo seco kilómetro tras kilómetro. Ajustá la capucha y el dobladillo para aislarte del frío cuando aumentás el ritmo. Este producto está hecho con materiales 100 % reciclados. Utilizando materiales reciclados disminuimos los residuos, nuestra dependencia de los recursos finitos y la huella que generan los productos que fabricamos.",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729478170/Campera_Own_the_Run_AEROREADY_Azul_IV7672_21_model_gucver.avif",
+    categoryId: 4,
+    stock: 10,
+  },
+  {
+    name: "RP3",
+    price: 397999,
+    description:
+      "Sin importar si es un día de lluvia o un día frío, este rompevientos ofrece estilo y comodidad. Enfrentate a los elementos sin sacrificar el estilo casual gracias al corte holgado que crea una vibra relajada. Su diseño práctico incorpora muchos bolsillos y detalles ajustables. Los detalles deportivos como las emblemáticas 3 Tiras en las mangas evocan el legado de adidas. Sal a la calle y luce increíble al hacerlo.",
+    image:
+      "https://res.cloudinary.com/dbtfna8ev/image/upload/v1729478255/Rompevientos_adidas_Premium_Blanco_IU0216_21_model_dcbcmw.avif",
+    categoryId: 4,
+    stock: 10,
+  },
 ];
+
 
 
 export const preLoadProducts = async () => {
